@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0e14">
+<title>三角洲帧率优化助手 · 免费硬件体检与帧率预测（演示版）</title>
+<meta name="description" content="三角洲行动玩家专属白帽性能管家：硬件体检、帧率预测、瓶颈诊断、系统优化建议。不碰游戏文件、不注入进程，安全不封号。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand"><span class="logo">Δ</span>三角洲帧率优化助手<span class="beta">演示版 v0.1</span></div>
+    <nav class="nav">
+      <a href="#checkup">免费体检</a>
+      <a href="#features">功能介绍</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ Hero ============ -->
+<section class="hero">
+  <div class="container">
+    <h1>你的配置，在三角洲<br>到底能跑<span class="accent">多少帧</span>？</h1>
+    <p class="sub">免费硬件体检 · 帧率预测 · 瓶颈诊断 · 白帽优化方案<br>
+    只调系统、不碰游戏文件、不注入进程 —— <strong>安全不封号</strong></p>
+    <div class="hero-cta">
+      <button class="btn btn-primary btn-lg" id="startBtn">▶ 开始免费体检</button>
+    </div>
+    <div class="badges">
+      <span class="badge">✅ 白帽优化 · 不改游戏文件</span>
+      <span class="badge">✅ 体检与基础优化永久免费</span>
+      <span class="badge">✅ 已收录 <b id="dataCount">12847</b> 条配置数据<small>（演示）</small></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 功能介绍 ============ -->
+<section class="features container" id="features">
+  <div class="feature">
+    <div class="f-icon">🔍</div>
+    <h3>硬件体检</h3>
+    <p>浏览器自动识别显卡与内存，手动补充 CPU 型号，10 秒生成配置画像。</p>
+  </div>
+  <div class="feature">
+    <div class="f-icon">📈</div>
+    <h3>帧率预测</h3>
+    <p>基于官方配置要求与性能数据库，预测 1080p 低 / 中 / 高 / 极致四档帧率与 1% low。</p>
+  </div>
+  <div class="feature">
+    <div class="f-icon">🛡️</div>
+    <h3>白帽优化</h3>
+    <p>电源计划、进程优先级、缓存清理等系统层优化建议，每一项可解释、可回滚、不封号。</p>
+  </div>
+</section>
+
+<!-- ============ 体检区 ============ -->
+<section class="checkup container" id="checkup">
+  <h2 class="sec-title">免费硬件体检</h2>
+
+  <div class="panel">
+    <!-- Step 1：检测 -->
+    <div id="detectBox" class="detect-box">
+      <p class="detect-hint">点击按钮，浏览器将读取<b>公开的图形设备信息</b>（仅本地使用，不上传任何数据）</p>
+      <button class="btn btn-primary btn-lg" id="runDetectBtn">🔍 开始检测</button>
+      <div id="detectLog" class="detect-log" hidden></div>
+    </div>
+
+    <div id="detectResult" hidden>
+      <div class="detect-head">
+        <h3>检测结果（可手动修正）</h3>
+        <button class="btn btn-ghost btn-sm" id="redetectBtn">↻ 重新检测</button>
+      </div>
+      <div class="form-grid">
+        <label>显卡 GPU
+          <select id="selGpu"></select>
+        </label>
+        <label>处理器 CPU
+          <select id="selCpu"></select>
+        </label>
+        <label>内存容量
+          <select id="selRam"></select>
+        </label>
+        <label>硬盘类型
+          <select id="selDisk">
+            <option value="nvme">固态硬盘 NVMe</option>
+            <option value="sata">固态硬盘 SATA</option>
+            <option value="hdd">机械硬盘</option>
+          </select>
+        </label>
+        <label>显示器分辨率
+          <select id="selRes">
+            <option value="1080p">1920×1080（1080p）</option>
+            <option value="1440p">2560×1440（2K）</option>
+            <option value="4k">3840×2160（4K）</option>
+          </select>
+        </label>
+      </div>
+      <p class="form-note">💡 浏览器无法直接读取 CPU 型号，请参照「任务管理器 → 性能」选择；内存容量为浏览器估算，请手动确认（游戏官方推荐 16GB）。</p>
+      <div class="center"><button class="btn btn-primary btn-lg" id="genReportBtn">📋 生成诊断报告</button></div>
+    </div>
+  </div>
+
+  <!-- Step 2：报告 -->
+  <div id="report" hidden></div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq container" id="faq">
+  <h2 class="sec-title">常见问题</h2>
+  <details>
+    <summary>你们的优化会改游戏文件吗？会被封号吗？</summary>
+    <p>不会。我们只调整 Windows 系统层设置（电源计划、进程优先级、缓存清理、网络参数等），<b>不修改游戏目录任何文件、不注入游戏进程、不读写游戏内存</b>。官方严打的是「修改 ini 文件获取视觉优势」的灰产行为，与我们做的事完全不同。</p>
+  </details>
+  <details>
+    <summary>免费吗？怎么收费？</summary>
+    <p>体检、帧率监控、基础优化永久免费。深度方案（低配稳帧包、优化前后对比报告、多方案切换等）为 VIP 内容，年卡 99 元。</p>
+  </details>
+  <details>
+    <summary>帧率预测准吗？</summary>
+    <p>预测基于官方配置要求与玩家众包数据回归；当前演示版为规则估算，实际帧率受驱动版本、散热、后台负载影响，请以游戏内实测为准。欢迎提交你的实测帧率帮助我们校准模型。</p>
+  </details>
+  <details>
+    <summary>支持哪些游戏？</summary>
+    <p>首发《三角洲行动》（烽火地带 / 全面战场），后续将支持 CS2、无畏契约等主流 FPS。</p>
+  </details>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container">
+    <p>三角洲帧率优化助手 · 演示原型 v0.1 —— 帧率数据为估算值，非官方数据；硬件信息仅在本地使用，不上传服务器。</p>
+    <p>《三角洲行动》为腾讯游戏产品，本项目为第三方玩家工具，与官方无关。ICP 备案（占位） · 隐私政策 · 用户协议</p>
+  </div>
+</footer>
+
+<!-- ============ 全局组件 ============ -->
+<div id="toast" class="toast" hidden></div>
+<div id="modalMask" class="modal-mask" hidden>
+  <div class="modal">
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+    <button class="btn" id="modalClose">关闭</button>
+  </div>
+</div>
+<canvas id="shareCanvas" width="750" height="1060" hidden></canvas>
+
+<script src="js/hwdb.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
